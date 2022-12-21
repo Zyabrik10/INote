@@ -1,0 +1,20 @@
+{
+	"version":"1.0.0",
+	"author":"Mazurok Olecsandr",
+	"default":{
+		"background":"",
+		"color":"black",
+		"border":"none",
+		"outline":"none",
+		"font-size":"12px",
+		"font-famaly":""
+	},
+	"custom":{
+		"background":"",
+		"color":"black",
+		"border":"none",
+		"outline":"none",
+		"font-size":"12px",
+		"font-famaly":""
+	}
+}

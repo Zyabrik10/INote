@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>INoteWindow</class>
+ <widget class="QMainWindow" name="INoteWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>500</width>
+    <height>500</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>INote</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true"/>
+  </property>
+  <property name="locale">
+   <locale language="Ukrainian" country="Ukraine"/>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QTextEdit" name="text_edit">
+      <property name="cursor" stdset="0">
+       <cursorShape>IBeamCursor</cursorShape>
+      </property>
+      <property name="autoFillBackground">
+       <bool>false</bool>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">border:none;
+font: 10pt &quot;Courier&quot;;
+margine: 0;
+padding:0;</string>
+      </property>
+      <property name="locale">
+       <locale language="Ukrainian" country="Ukraine"/>
+      </property>
+      <property name="autoFormatting">
+       <set>QTextEdit::AutoAll</set>
+      </property>
+      <property name="tabChangesFocus">
+       <bool>false</bool>
+      </property>
+      <property name="html">
+       <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Courier'; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'MS Shell Dlg 2'; font-size:8.25pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+      <property name="overwriteMode">
+       <bool>false</bool>
+      </property>
+      <property name="acceptRichText">
+       <bool>true</bool>
+      </property>
+      <property name="cursorWidth">
+       <number>1</number>
+      </property>
+      <property name="placeholderText">
+       <string>Hello World! This INote was developed by @Zyabrik10. Support: sasamazurok@gmail.com. </string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="Line" name="devision_hline">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="bottom_help_bar">
+      <item>
+       <widget class="QLabel" name="file_state">
+        <property name="text">
+         <string>unsaved</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="Line" name="devision_vline_1">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="name_file">
+        <property name="text">
+         <string>New File</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="Line" name="devision_vline_2">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="file_extension">
+        <property name="text">
+         <string>.inote</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menu_bar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>500</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menu_file">
+    <property name="title">
+     <string>&amp;File</string>
+    </property>
+    <addaction name="open_file"/>
+    <addaction name="new_file"/>
+    <addaction name="separator"/>
+    <addaction name="save_file"/>
+    <addaction name="save_as_file"/>
+    <addaction name="separator"/>
+    <addaction name="exit"/>
+   </widget>
+   <widget class="QMenu" name="menu_edit">
+    <property name="title">
+     <string>&amp;Edit</string>
+    </property>
+    <widget class="QMenu" name="menu_edit_saved">
+     <property name="title">
+      <string>&amp;Saved</string>
+     </property>
+     <addaction name="open_list"/>
+     <addaction name="clear_list"/>
+    </widget>
+    <addaction name="edit"/>
+    <addaction name="separator"/>
+    <addaction name="menu_edit_saved"/>
+    <addaction name="separator"/>
+    <addaction name="edit_default"/>
+   </widget>
+   <widget class="QMenu" name="menu_settins">
+    <property name="title">
+     <string>&amp;Settings</string>
+    </property>
+    <addaction name="settings_preferences"/>
+    <addaction name="separator"/>
+    <addaction name="settings_default"/>
+   </widget>
+   <widget class="QMenu" name="menu_info">
+    <property name="title">
+     <string>&amp;Info</string>
+    </property>
+    <addaction name="about_note"/>
+   </widget>
+   <widget class="QMenu" name="menu_help">
+    <property name="title">
+     <string>&amp;Help</string>
+    </property>
+    <addaction name="help"/>
+   </widget>
+   <widget class="QMenu" name="menu_find">
+    <property name="title">
+     <string>&amp;Find</string>
+    </property>
+    <addaction name="find"/>
+   </widget>
+   <addaction name="menu_file"/>
+   <addaction name="menu_edit"/>
+   <addaction name="menu_settins"/>
+   <addaction name="menu_info"/>
+   <addaction name="menu_find"/>
+   <addaction name="menu_help"/>
+  </widget>
+  <action name="open_file">
+   <property name="checkable">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normaloff>icons/Oxygen-Icons.org-Oxygen-Mimetypes-inode-directory.ico</normaloff>icons/Oxygen-Icons.org-Oxygen-Mimetypes-inode-directory.ico</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Open &amp;File</string>
+   </property>
+  </action>
+  <action name="save_file">
+   <property name="text">
+    <string>&amp;Save </string>
+   </property>
+  </action>
+  <action name="save_as_file">
+   <property name="text">
+    <string>&amp;Save as...</string>
+   </property>
+  </action>
+  <action name="open_list">
+   <property name="text">
+    <string>&amp;Open &amp;List</string>
+   </property>
+  </action>
+  <action name="clear_list">
+   <property name="text">
+    <string>&amp;Clear &amp;List</string>
+   </property>
+  </action>
+  <action name="edit">
+   <property name="icon">
+    <iconset>
+     <normaloff>icons/Custom-Icon-Design-Pretty-Office-10-Pencil.ico</normaloff>icons/Custom-Icon-Design-Pretty-Office-10-Pencil.ico</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Edit </string>
+   </property>
+  </action>
+  <action name="new_file">
+   <property name="icon">
+    <iconset>
+     <normaloff>icons/Harwen-Pleasant-Program-Group.ico</normaloff>icons/Harwen-Pleasant-Program-Group.ico</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;New &amp;File</string>
+   </property>
+  </action>
+  <action name="exit">
+   <property name="text">
+    <string>&amp;Exit</string>
+   </property>
+  </action>
+  <action name="edit_default">
+   <property name="text">
+    <string>Default</string>
+   </property>
+  </action>
+  <action name="settings_preferences">
+   <property name="icon">
+    <iconset>
+     <normaloff>icons/Martz90-Circle-Settings.ico</normaloff>icons/Martz90-Circle-Settings.ico</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Preferences...</string>
+   </property>
+  </action>
+  <action name="settings_default">
+   <property name="text">
+    <string>&amp;Default</string>
+   </property>
+  </action>
+  <action name="about_note">
+   <property name="text">
+    <string>About INote</string>
+   </property>
+  </action>
+  <action name="actionHelp">
+   <property name="text">
+    <string>Help</string>
+   </property>
+  </action>
+  <action name="help">
+   <property name="text">
+    <string>&amp;Help</string>
+   </property>
+  </action>
+  <action name="find">
+   <property name="text">
+    <string>&amp;Find</string>
+   </property>
+  </action>
+ </widget>
+ <tabstops>
+  <tabstop>text_edit</tabstop>
+ </tabstops>
+ <resources/>
+ <connections/>
+</ui>

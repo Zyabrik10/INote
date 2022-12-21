@@ -1,0 +1,9 @@
+😁 Hello dear reader 😘! 
+This is an app which is the first big project on my path to becoming python developer. INote is the improve version of classic notepad. The main feature of my application is its customization. You can customize it as you want from main window to small things. And this dialog windiw is not exception). Also it may has some bugs but as soon as possible I`ll eliminate`em. Hope you`ll like my creation. 
+
+Ou, I`m sorry, yours)
+
+===========================================
+
+PS:
+If you have some ask or questions here is my email: sasamazurok@gmail.com and telegram: @zyabrik10 
