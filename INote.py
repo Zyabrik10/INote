@@ -12,9 +12,6 @@ import sys
 import json
 import os
 import codecs
-from File import File
-print(File)
-
 
 def open_styles_list_json(dirname, file_name):
 
