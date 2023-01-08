@@ -12,81 +12,107 @@ import sys
 import json
 import os
 import codecs
+from File import File
+print(File)
 
 
-def openStylesListJson(dirname, name_file):
+def open_styles_list_json(dirname, file_name):
+
     try:
-        with open(f"{os.getcwd()}\\{dirname}\\{name_file}.json", "r", encoding="utf-8") as file:
+        path = f".\{dirname}\{file_name}.json"
+
+        with open(path, "r", encoding="utf-8") as file:
             text = json.loads(file.read())
             file.close()
+
         return text
-    except:
-        return 0
+
+    except FileNotFoundError as e:
+        print(e)
 
 
-def getTextFromTextsFile(dirname, name_file):
+def get_text_from_text_file(dirname, file_name):
     try:
-        with open(f"{os.getcwd()}\\{dirname}\\{name_file}.txt", "r", encoding="utf-8") as file:
+
+        with open(f".\{dirname}\{file_name}.txt", "r", encoding="utf-8") as file:
             text = file.read()
             file.close()
+
         return text
-    except:
-        print("error")
+
+    except FileNotFoundError as e:
+        print(e)
 
 
-def GetTextfomFile(path):
-    with open(path, "r", encoding="utf-8") as file:
-        text = file.read()
-        file.close()
-    return text
+""" method get_styles
+
+{
+	"default":{
+		"background":"transparent",
+		"color":"black",
+		"border":"none",
+		"outline":"none",
+		"font-size":"10px",
+		"font-famaly":""
+	},
+	"custom":{
+		"background":"transparent",
+		"color":"black",
+		"border":"none",
+		"outline":"none",
+		"font-size":"10px",
+		"font-famaly":""
+	}
+} 
+
+=>
+
+background:"transparent";
+color:"black";
+border:"none";
+outline:"none";
+font-size:"10px";
+font-famaly:"";
+
+"""
 
 
-def getStyles(jsonList, st="custom"): return "".join(
-    [f"{style}:{jsonList[st][style]};\n" for style in jsonList[st]])
+def get_styles(json_list, type_style="custom"):
+    return "".join([f"{style}:{json_list[type_style][style]};\n" for style in json_list[type_style]])
 
 
-def createWriteFile(filename, dirname="texttemp", text="", extension="txt"):
+def create_write_file(filename, dirname="texttemp", text="", extension="txt", encoding="utf-8"):
     try:
-        with open(f"{dirname}/{filename}.{extension}", "w", encoding="utf-8") as file:
+
+        with open(f"./{dirname}/{filename}.{extension}", "w", encoding=encoding) as file:
+            file_exist
             file.write(text)
             file.close()
-        return 1
-    except:
-        return 0
 
-
-def checkDiffer(main_file_text, temptext):
-    main_text = main_file_text.split("\n")
-    temp_text = temptext.split("\n")
-
-    if len(main_text) < len(temp_text) or len(main_text) > len(temp_text):
         return True
 
-    for i in temp_text:
-        for j in main_text:
-            if len(i) != len(j):
-                return True
-
-    return False
+    except FileExistsError as e:
+        print(e)
+        return False
 
 
-def doesFileExist(arroffile, namefile):
+def file_exist(arroffile, namefile):
     return bool([i for i in [i.split(".")[0] for i in arroffile] if i == namefile])
 
 
-def getListOfFiles(dirname): return os.listdir(dirname)
+def get_files_list(dirname):
+    return os.listdir(dirname)
 
 
 class Ui_INoteWindow(QMainWindow):
-    # class Ui_INoteWindow(object):
     def setupUi(self, INoteWindow):
 
         INoteWindow.setObjectName("INoteWindow")
         INoteWindow.resize(500, 500)
         INoteWindow.setWindowIcon(QIcon("icons/main_icon_note.ico"))
 
-        INoteWindow_styles = openStylesListJson("pref", "main_window")
-        INoteWindow.setStyleSheet(getStyles(INoteWindow_styles))
+        INoteWindow_styles = open_styles_list_json("pref", "main_window")
+        INoteWindow.setStyleSheet(get_styles(INoteWindow_styles))
 
         self.centralwidget = QWidget(INoteWindow)
         self.centralwidget.setObjectName("centralwidget")
@@ -99,8 +125,8 @@ class Ui_INoteWindow(QMainWindow):
             "cursor", QtGui.QCursor(QtCore.Qt.IBeamCursor))
         self.text_edit.setObjectName("text_edit")
 
-        text_edit_styles = openStylesListJson("pref", "main_input")
-        self.text_edit.setStyleSheet(getStyles(text_edit_styles))
+        text_edit_styles = open_styles_list_json("pref", "main_input")
+        self.text_edit.setStyleSheet(get_styles(text_edit_styles))
 
         self.verticalLayout.addWidget(self.text_edit)
 
@@ -110,10 +136,10 @@ class Ui_INoteWindow(QMainWindow):
         self.devision_hline.setObjectName("devision_hline")
         self.verticalLayout.addWidget(self.devision_hline)
 
-        main_window_devision_hline_styles = openStylesListJson(
+        main_window_devision_hline_styles = open_styles_list_json(
             "pref", "main_window_devision_hline")
         self.devision_hline.setStyleSheet(
-            getStyles(main_window_devision_hline_styles))
+            get_styles(main_window_devision_hline_styles))
 
         self.bottom_help_bar = QHBoxLayout()
         self.bottom_help_bar.setObjectName("bottom_help_bar")
@@ -123,10 +149,10 @@ class Ui_INoteWindow(QMainWindow):
         self.file_path.setObjectName("file_path")
         self.bottom_help_bar.addWidget(self.file_path)
 
-        bottom_menu_bar_main_window_file_path_styles = openStylesListJson(
+        bottom_menu_bar_main_window_file_path_styles = open_styles_list_json(
             "pref", "bottom_menu_bar_main_window_file_path")
         self.file_path.setStyleSheet(
-            getStyles(bottom_menu_bar_main_window_file_path_styles))
+            get_styles(bottom_menu_bar_main_window_file_path_styles))
 
         self.devision_vline_1 = QFrame(self.centralwidget)
         self.devision_vline_1.setFrameShape(QFrame.VLine)
@@ -134,9 +160,10 @@ class Ui_INoteWindow(QMainWindow):
         self.devision_vline_1.setObjectName("devision_vline_1")
         self.bottom_help_bar.addWidget(self.devision_vline_1)
 
-        devision_vline_1_styles = openStylesListJson(
+        devision_vline_1_styles = open_styles_list_json(
             "pref", "main_window_bottom_menu_bar_devision_vline_1")
-        self.devision_vline_1.setStyleSheet(getStyles(devision_vline_1_styles))
+        self.devision_vline_1.setStyleSheet(
+            get_styles(devision_vline_1_styles))
 
         self.name_file = QLabel(self.centralwidget)
         self.name_file.setAlignment(QtCore.Qt.AlignCenter)
@@ -161,25 +188,26 @@ class Ui_INoteWindow(QMainWindow):
         self.menu_bar.setGeometry(QtCore.QRect(0, 0, 500, 21))
         self.menu_bar.setObjectName("menu_bar")
 
-        main_window_top_menu_bar_styles = openStylesListJson(
+        main_window_top_menu_bar_styles = open_styles_list_json(
             "pref", "main_window_top_menu_bar")
-        self.menu_bar.setStyleSheet(getStyles(main_window_top_menu_bar_styles))
+        self.menu_bar.setStyleSheet(
+            get_styles(main_window_top_menu_bar_styles))
 
         self.menu_file = QMenu(self.menu_bar)
         self.menu_file.setObjectName("menu_file")
 
-        main_window_top_menu_bar_menu_file_styles = openStylesListJson(
+        main_window_top_menu_bar_menu_file_styles = open_styles_list_json(
             "pref", "main_window_top_menu_bar_menu_file")
         self.menu_file.setStyleSheet(
-            getStyles(main_window_top_menu_bar_menu_file_styles))
+            get_styles(main_window_top_menu_bar_menu_file_styles))
 
         self.menu_edit = QMenu(self.menu_bar)
         self.menu_edit.setObjectName("menu_edit")
 
-        main_window_top_menu_bar_menu_edit_styles = openStylesListJson(
+        main_window_top_menu_bar_menu_edit_styles = open_styles_list_json(
             "pref", "main_window_top_menu_bar_menu_edit")
         self.menu_edit.setStyleSheet(
-            getStyles(main_window_top_menu_bar_menu_edit_styles))
+            get_styles(main_window_top_menu_bar_menu_edit_styles))
 
         self.menu_edit_saved = QMenu(self.menu_edit)
         self.menu_edit_saved.setObjectName("menu_edit_saved")
@@ -314,15 +342,15 @@ class Ui_INoteWindow(QMainWindow):
         information_field = QTextEdit(menu_help_dialog)
         information_field.setReadOnly(True)
 
-        text = getTextFromTextsFile("texts", "help_modal_window_text")
+        text = get_text_from_text_file("texts", "help_modal_window_text")
 
         information_field.setPlainText(text)
 
-        style_of_help_dialog_window_text_edit = openStylesListJson(
+        style_of_help_dialog_window_text_edit = open_styles_list_json(
             "pref", "help_dialog_modal_window_text_edit")
 
         information_field.setStyleSheet(
-            getStyles(style_of_help_dialog_window_text_edit))
+            get_styles(style_of_help_dialog_window_text_edit))
 
         help_menu_dialog_hrlayout.addWidget(information_field)
 
@@ -347,15 +375,15 @@ class Ui_INoteWindow(QMainWindow):
         information_field = QTextEdit(info_dialog)
         information_field.setReadOnly(True)
 
-        text = getTextFromTextsFile("texts", "info_modal_window_text")
+        text = get_text_from_text_file("texts", "info_modal_window_text")
 
         information_field.setPlainText(text)
 
-        style_of_info_dialog_window_text_edit = openStylesListJson(
+        style_of_info_dialog_window_text_edit = open_styles_list_json(
             "pref", "info_dialog_modal_window_text_edit")
 
         information_field.setStyleSheet(
-            getStyles(style_of_info_dialog_window_text_edit))
+            get_styles(style_of_info_dialog_window_text_edit))
 
         info_dialog_hrlayout.addWidget(information_field)
 
@@ -379,9 +407,9 @@ class Ui_INoteWindow(QMainWindow):
             with codecs.open(filename, "rb", encoding="utf-8", errors='replace') as file:
                 txt = file.read()
                 self.text_edit.setPlainText(txt)
-                createWriteFile(namefile, extension="iss")
-                createWriteFile(namefile, dirname="savedfiles",
-                                text=self.text_edit.toPlainText(), extension="inote")
+                create_write_file(namefile, extension="iss")
+                create_write_file(namefile, dirname="savedfiles",
+                                  text=self.text_edit.toPlainText(), extension="inote")
                 file.close()
         except FileNotFoundError:
             return
@@ -396,8 +424,9 @@ class Ui_INoteWindow(QMainWindow):
                 return
 
     def Save_file(self):
-        saved = doesFileExist(getListOfFiles(
-            "texttemp"), self.name_file.text())
+        # saved = file_exist(get_files_list(
+        #     "texttemp"), self.name_file.text())
+        saved = True
         if saved:
             text_file_name = f"savedfiles/{self.name_file.text()}.inote"
 
@@ -427,7 +456,7 @@ class Ui_INoteWindow(QMainWindow):
                 file.write(txt)
                 self.file_extension.setText(f"{extension}")
                 self.name_file.setText(namefile)
-                createWriteFile(namefile, text=txt)
+                create_write_file(namefile, text=txt)
                 file.close()
             self.file_path.setText(filename)
         except FileNotFoundError:
@@ -435,7 +464,7 @@ class Ui_INoteWindow(QMainWindow):
 
     def retranslateUi(self, INoteWindow):
 
-        hot_keys = openStylesListJson("pref", "hot_keys")
+        hot_keys = open_styles_list_json("pref", "hot_keys")
 
         # window title
 
@@ -568,8 +597,13 @@ class Ui_INoteWindow(QMainWindow):
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
+
     INoteWindow = QMainWindow()
+
     ui = Ui_INoteWindow()
+
     ui.setupUi(INoteWindow)
+
     INoteWindow.show()
+
     sys.exit(app.exec_())
